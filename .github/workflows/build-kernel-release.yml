@@ -580,17 +580,17 @@ jobs:
           CLEAN_BUILD="${{ inputs.clean_build }}"
           
           # Determine SUSFS branches used
-          SUSFS_A12="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
-          SUSFS_A13="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
+          # SUSFS_A12="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
+          # SUSFS_A13="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
           SUSFS_A14="${{ inputs.android14-6_1_susfs_branch_or_commit }}"
-          SUSFS_A15="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
-          SUSFS_A16="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
+          # SUSFS_A15="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
+          # SUSFS_A16="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
           
-          [ -z "$SUSFS_A12" ] && SUSFS_A12="gki-android12-5.10 (auto)"
-          [ -z "$SUSFS_A13" ] && SUSFS_A13="gki-android13-5.15 (auto)"
+          # [ -z "$SUSFS_A12" ] && SUSFS_A12="gki-android12-5.10 (auto)"
+          # [ -z "$SUSFS_A13" ] && SUSFS_A13="gki-android13-5.15 (auto)"
           [ -z "$SUSFS_A14" ] && SUSFS_A14="gki-android14-6.1 (auto)"
-          [ -z "$SUSFS_A15" ] && SUSFS_A15="gki-android15-6.6 (auto)"
-          [ -z "$SUSFS_A16" ] && SUSFS_A16="gki-android16-6.12 (auto)"
+          # [ -z "$SUSFS_A15" ] && SUSFS_A15="gki-android15-6.6 (auto)"
+          # [ -z "$SUSFS_A16" ] && SUSFS_A16="gki-android16-6.12 (auto)"
           
           cat << EOF > release_notes.md
           # 🎯 OnePlus Kernels with $KSU_TYPE & SUSFS $SUSFS_BASE_VERSION
@@ -678,11 +678,11 @@ jobs:
           
           | Kernel Version | SUSFS Branch/Commit |
           |----------------|---------------------|
-          | android12-5.10 | \`$SUSFS_A12\` |
-          | android13-5.15 | \`$SUSFS_A13\` |
+          # | android12-5.10 | \`$SUSFS_A12\` |
+          # | android13-5.15 | \`$SUSFS_A13\` |
           | android14-6.1  | \`$SUSFS_A14\` |
-          | android15-6.6  | \`$SUSFS_A15\` |
-          | android16-6.12 | \`$SUSFS_A16\` |
+          # | android15-6.6  | \`$SUSFS_A15\` |
+          # | android16-6.12 | \`$SUSFS_A16\` |
           
           ---
           

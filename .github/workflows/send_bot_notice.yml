@@ -1,5 +1,4 @@
-name: Test Telegram Notification
-
+name: Test Thông báo Telegram
 on:
   workflow_dispatch:
 
@@ -9,7 +8,7 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: 📱 Test Telegram Notification (Latest Release)
+      - name: 📱 Test Thông báo Telegram (Latest Release)
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
@@ -33,7 +32,7 @@ jobs:
           
           echo "✅ Found latest Release Tag: $LATEST_TAG"
           
-          MSG_TEXT="🧪 <b>[TEST] OnePlus Kernel Release!</b>"$'\n'
+          MSG_TEXT="🧪 <b>[TEST] Oppo Find X7 Ultra Kernel Release!</b>"$'\n'
           MSG_TEXT+="━━━━━━━━━━━━━━━━━━"$'\n'
           MSG_TEXT+="<b>🏷️ Release Tag:</b> <code>${LATEST_TAG}</code>"$'\n'
           MSG_TEXT+="<b>🔐 Root Solution:</b> Auto-detected"$'\n'

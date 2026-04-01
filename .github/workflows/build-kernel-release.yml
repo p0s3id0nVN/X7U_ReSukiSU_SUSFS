@@ -1,8 +1,11 @@
-name: Build and Release OnePlus Kernels
+name: Build and Release Oppo Kernels
 
 permissions:
   contents: write
   actions: write
+  workflows: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 on:
   workflow_dispatch:

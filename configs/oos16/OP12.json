@@ -1,5 +1,5 @@
 {
-  "model": "OP12",
+  "model": "X7U",
   "soc": "pineapple",
   "branch": "wild/sm8650",
   "manifest": "oneplus_12_w.xml",
@@ -16,5 +16,5 @@
   "ttl": true,
   "ip_set": true,
   "unicode": true,
-  "uname": "OP-RESUKISU"
+  "uname": "X7U-RESUKISU"
 }

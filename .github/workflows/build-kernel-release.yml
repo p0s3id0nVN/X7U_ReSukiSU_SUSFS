@@ -512,7 +512,7 @@ jobs:
       REPO_OWNER: ${{ github.repository_owner }}
       REPO_NAME: ${{ github.event.repository.name }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      RELEASE_NAME: 'OnePlus Kernels With ReSukiSU & SUSFS v2.1.0'
+      RELEASE_NAME: 'OP Kernels With ReSukiSU & SUSFS v2.1.0'
       SUSFS_BASE_VERSION: 'v2.1.0'
     steps:
       - name: 📥 Checkout code
@@ -855,7 +855,7 @@ jobs:
           ZIP_COUNT=${#ZIPS[@]}
           
           if [ "$ZIP_COUNT" -eq 0 ]; then
-            MODELS="None"
+            MODELS="X7U"
             OS_VERS="None"
             KSU_VERS="Unknown"
           else

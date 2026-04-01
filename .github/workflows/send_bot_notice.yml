@@ -48,6 +48,7 @@ jobs:
             ZIP_COUNT=$(echo "$ASSETS" | grep -c '\.zip$' || true)
             
             MSG_TEXT+="<b>📦 Total Packages:</b> ${ZIP_COUNT} zips"$'\n'
+            # MSG_TEXT+="<b>📱 Supported Models:</b> ${MODELS}"$'\n'
             MSG_TEXT+="<b>📱 Supported Models:</b> ${MODELS}"$'\n'
             MSG_TEXT+="<b>💻 Supported OS:</b> ${OS_VERS}"$'\n\n'
           fi

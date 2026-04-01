@@ -1,86 +1,18 @@
 name: Test Telegram Notification
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Dòng này giúp hiện nút "Run workflow"
 
-run: |
-  set -euo pipefail
-  echo "::group::Fetch Latest Release & Send Telegram Notification"
-  
-  if [ -z "$TG_BOT_TOKEN" ] || [ -z "$TG_CHAT_ID" ]; then
-    echo "::error::Telegram secrets not configured! Please check TG_BOT_TOKEN and TG_CHAT_ID."
-    exit 1
-  fi
-  
-  echo "Fetching latest release từ GitHub API..."
-  
-  # Lấy thông tin release và repo một cách an toàn
-  REPO_PATH="${{ github.repository }}"
-  RELEASE_DATA=$(gh api repos/$REPO_PATH/releases/latest)
-  LATEST_TAG=$(echo "$RELEASE_DATA" | jq -r '.tag_name')
-  
-  if [ -z "$LATEST_TAG" ] || [ "$LATEST_TAG" == "null" ]; then
-    echo "::error::No releases found!"
-    exit 1
-  fi
-  
-  echo "✅ Found latest Release Tag: $LATEST_TAG"
-  
-  # Xây dựng nội dung tin nhắn dùng biến cục bộ để tránh lỗi escape ký tự
-  MSG_TEXT="🧪 <b>[TEST] OnePlus Kernel Release!</b>
-  ━━━━━━━━━━━━━━━━━━
-  <b>🏷️ Release Tag:</b> <code>${LATEST_TAG}</code>
-  <b>🔐 Root Solution:</b> Auto-detected
-  ━━━━━━━━━━━━━━━━━━"
-  
-  ASSETS=$(echo "$RELEASE_DATA" | jq -r '.assets[].name' || true)
-  
-  if [ -z "$ASSETS" ] || [ "$ASSETS" == "null" ]; then
-    MSG_TEXT="$MSG_TEXT
-  <i>⚠️ No assets found in this release.</i>"
-  else
-    MODELS=$(echo "$ASSETS" | grep '\.zip$' | awk -F'_' '{print $2}' | sort -u | paste -sd ", " - || echo "Various")
-    OS_VERS=$(echo "$ASSETS" | grep '\.zip$' | awk -F'_' '{print $3}' | sort -u | paste -sd ", " - || echo "Various")
-    ZIP_COUNT=$(echo "$ASSETS" | grep -c '\.zip$' || true)
-    
-    MSG_TEXT="$MSG_TEXT
-  <b>📦 Total Packages:</b> ${ZIP_COUNT} zips
-  <b>📱 Supported Models:</b> ${MODELS}
-  <b>💻 Supported OS:</b> ${OS_VERS}"
-  fi
-  
-  # Fix lỗi thẻ <a> bằng cách sử dụng biến REPO_PATH đã gán sẵn
-  DOWNLOAD_URL="https://github.com/${REPO_PATH}/releases/tag/${LATEST_TAG}"
-  
-  MSG_TEXT="$MSG_TEXT
-  ━━━━━━━━━━━━━━━━━━
-  👉 <a href=\"${DOWNLOAD_URL}\"><b>📥 DOWNLOAD YOUR KERNEL HERE</b></a>"
-  
-  # Tách Chat ID và gửi
-  IFS=' ,' read -r -a CHAT_IDS <<< "$TG_CHAT_ID"
-  
-  for ID in "${CHAT_IDS[@]}"; do
-    if [ -z "$ID" ]; then continue; fi
-    
-    # Dùng jq để build JSON là cực kỳ chuẩn, giữ nguyên
-    PAYLOAD=$(jq -n \
-      --arg chat_id "$ID" \
-      --arg text "$MSG_TEXT" \
-      '{
-        chat_id: $chat_id,
-        parse_mode: "HTML",
-        disable_web_page_preview: true,
-        text: $text
-      }')
-    
-    HTTP_RESPONSE=$(curl -s -w "%{http_code}" -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
-      -H "Content-Type: application/json" \
-      -d "$PAYLOAD")
-      
-    if [[ "$HTTP_RESPONSE" == *200 ]]; then
-      echo "✅ Success for $ID!"
-    else
-      echo "::error::Failed for $ID! Response: $HTTP_RESPONSE"
-    fi
-  done
-  echo "::endgroup::"
+jobs:
+  test-notify:        # Thụt vào 2 khoảng trắng
+    runs-on: ubuntu-latest
+    permissions:      # Thêm dòng này để tránh lỗi quyền
+      contents: read
+    steps:            # Thụt vào 4 khoảng trắng
+      - name: 📱 Test...
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: |        # Code bash nằm sau dấu gạch đứng
+          set -euo pipefail
+          ...

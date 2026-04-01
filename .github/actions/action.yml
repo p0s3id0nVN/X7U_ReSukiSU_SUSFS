@@ -1,5 +1,5 @@
 name: 'Build Oppo Find X7 Ultra Kernel with KernelSU / ReSukiSU'
-description: 'GitHub Action to build OnePlus kernels with original KernelSU or ReSukiSU, and SUSFS integration, optimized for performance and reliability'
+description: 'GitHub Action to build Oppo Find X7 Ultra kernels with original KernelSU or ReSukiSU, and SUSFS integration, optimized for performance and reliability'
 inputs:
   op_config_json:
     description: 'JSON string containing full device config'
@@ -10,7 +10,7 @@ inputs:
     required: true
     type: choice
     options:
-      - KSUN
+      - KSU
       - ReSukiSU
   ksu_branch_or_hash:
     description: 'KSU branch or commit hash (empty = auto-detect by ksu_type)'
@@ -325,7 +325,7 @@ runs:
         SUKISU_KERNEL_PATCH="$GITHUB_WORKSPACE/patch_linux"
         KERNEL_PATCHES_DIR="$GITHUB_WORKSPACE/kernel_patches"
         SUSFS_DIR="$GITHUB_WORKSPACE/susfs4ksu"
-        KSUN_DIR="$KERNEL_PLATFORM_DIR/KernelSU-Next"
+        KSU_DIR="$KERNEL_PLATFORM_DIR/KernelSU"
         mkdir -p "$ARTIFACTS_DIR"
         
         # Save to environment for later steps
@@ -338,7 +338,7 @@ runs:
         echo "SUKISU_KERNEL_PATCH=$SUKISU_KERNEL_PATCH" >> "$GITHUB_ENV"
         echo "KERNEL_PATCHES_FOLDER=$KERNEL_PATCHES_DIR" >> "$GITHUB_ENV"
         echo "SUSFS_FOLDER=$SUSFS_DIR" >> "$GITHUB_ENV"
-        echo "KSUN_FOLDER=$KSUN_DIR" >> "$GITHUB_ENV"
+        echo "KSU_FOLDER=$KSU_DIR" >> "$GITHUB_ENV"
 
     - name: Get Kernel Version Info
       shell: bash
@@ -593,7 +593,7 @@ runs:
         echo "::group::Clone dependencies"
         echo "Cloning AnyKernel3 and other dependencies..."
         
-        ANYKERNEL_BRANCH="fool"
+        ANYKERNEL_BRANCH="gki-2.0"
         
         if [ "${{ env.OP_SUSFS }}" = true ]; then
           # Determine SUSFS branch/commit to use
@@ -603,9 +603,13 @@ runs:
           declare -A DEFAULT_SUSFS=(
             # ["android12-5.10"]="gki-android12-5.10"
             # ["android13-5.15"]="gki-android13-5.15"
+            ["android12-5.10"]="gki-android12-5.10"
+            ["android13-5.15"]="gki-android13-5.15"
             ["android14-6.1"]="gki-android14-6.1"
             # ["android15-6.6"]="gki-android15-6.6"
             # ["android16-6.12"]="gki-android16-6.12"
+            ["android15-6.6"]="gki-android15-6.6"
+            ["android16-6.12"]="gki-android16-6.12"
           )
           
           # Determine which SUSFS branch to use
@@ -1685,7 +1689,7 @@ runs:
           echo "Optimization: ${{ inputs.optimize_level }}"
           echo "Clean Build: ${{ inputs.clean }}"
           echo ""
-          echo "=== OnePlus Features ==="
+          echo "=== Oppo Features ==="
           echo "BBR: ${{ env.OP_BBR }}"
           echo "BBG: ${{ env.OP_BBG }}"
           echo "HMBIRD SCX: ${{ env.OP_HMBIRD }}"
@@ -1746,7 +1750,7 @@ runs:
           fi
           
           echo ""
-          echo "### 🔧 OnePlus Features"
+          echo "### 🔧 Oppo Features"
           echo ""
           echo "| Feature | Status |"
           echo "|---------|--------|"

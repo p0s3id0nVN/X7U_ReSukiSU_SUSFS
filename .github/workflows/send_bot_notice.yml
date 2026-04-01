@@ -6,7 +6,6 @@ on:
 jobs:
   test-notify:
     runs-on: ubuntu-latest
-    permissions:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:

@@ -1,5 +1,5 @@
-name: 'Build Oppo Find X7 Ultra Kernel with KernelSU / ReSukiSU'
-description: 'GitHub Action to build Oppo Find X7 Ultra kernels with original KernelSU or ReSukiSU, and SUSFS integration, optimized for performance and reliability'
+name: 'Build Oppo Kernel with KernelSU / ReSukiSU'
+description: 'GitHub Action to build Oppo kernels with original KernelSU or ReSukiSU, and SUSFS integration, optimized for performance and reliability'
 inputs:
   op_config_json:
     description: 'JSON string containing full device config'
@@ -1685,7 +1685,7 @@ runs:
           echo "Optimization: ${{ inputs.optimize_level }}"
           echo "Clean Build: ${{ inputs.clean }}"
           echo ""
-          echo "=== Oppo Features ==="
+          echo "=== OnePlus Features ==="
           echo "BBR: ${{ env.OP_BBR }}"
           echo "BBG: ${{ env.OP_BBG }}"
           echo "HMBIRD SCX: ${{ env.OP_HMBIRD }}"
@@ -1746,7 +1746,7 @@ runs:
           fi
           
           echo ""
-          echo "### 🔧 Oppo Features"
+          echo "### 🔧 OnePlus Features"
           echo ""
           echo "| Feature | Status |"
           echo "|---------|--------|"

@@ -115,18 +115,18 @@ jobs:
           case "$input" in
             # OOS14+15+16)
             #   ;;
-            OOS15+16)
-              jq_filter="map(select(.os_version == \"OOS15\" or .os_version == \"OOS16\"))"
-              ;;
+            # OOS15+16)
+            #   jq_filter="map(select(.os_version == \"OOS15\" or .os_version == \"OOS16\"))"
+            #   ;;
             # OOS14+15)
             #   jq_filter="map(select(.os_version == \"OOS14\" or .os_version == \"OOS15\"))"
             #   ;;
             OOS16)
               jq_filter="map(select(.os_version == \"OOS16\"))"
               ;;
-            OOS15)
-              jq_filter="map(select(.os_version == \"OOS15\"))"
-              ;;
+            # OOS15)
+            #   jq_filter="map(select(.os_version == \"OOS15\"))"
+            #   ;;
             # OOS14)
             #   jq_filter="map(select(.os_version == \"OOS14\"))"
             #   ;;

@@ -1,0 +1,2 @@
+# X7U_ReSukiSU_SUSFS
+GKI Oppo X7U ReSukiSU

@@ -10,7 +10,7 @@ inputs:
     required: true
     type: choice
     options:
-      - KSU
+      - KSUN
       - ReSukiSU
   ksu_branch_or_hash:
     description: 'KSU branch or commit hash (empty = auto-detect by ksu_type)'
@@ -325,7 +325,7 @@ runs:
         SUKISU_KERNEL_PATCH="$GITHUB_WORKSPACE/patch_linux"
         KERNEL_PATCHES_DIR="$GITHUB_WORKSPACE/kernel_patches"
         SUSFS_DIR="$GITHUB_WORKSPACE/susfs4ksu"
-        KSU_DIR="$KERNEL_PLATFORM_DIR/KernelSU"
+        KSUN_DIR="$KERNEL_PLATFORM_DIR/KernelSU-Next"
         mkdir -p "$ARTIFACTS_DIR"
         
         # Save to environment for later steps
@@ -338,7 +338,7 @@ runs:
         echo "SUKISU_KERNEL_PATCH=$SUKISU_KERNEL_PATCH" >> "$GITHUB_ENV"
         echo "KERNEL_PATCHES_FOLDER=$KERNEL_PATCHES_DIR" >> "$GITHUB_ENV"
         echo "SUSFS_FOLDER=$SUSFS_DIR" >> "$GITHUB_ENV"
-        echo "KSU_FOLDER=$KSU_DIR" >> "$GITHUB_ENV"
+        echo "KSUN_FOLDER=$KSUN_DIR" >> "$GITHUB_ENV"
 
     - name: Get Kernel Version Info
       shell: bash

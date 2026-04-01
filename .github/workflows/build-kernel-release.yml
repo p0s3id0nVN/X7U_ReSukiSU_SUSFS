@@ -1,10 +1,4 @@
 name: Build and Release Oppo Kernels
-
-permissions:
-  contents: write
-  actions: write
-
-on:
   workflow_dispatch:
     inputs:
       make_release:

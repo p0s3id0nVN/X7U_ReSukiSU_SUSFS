@@ -869,7 +869,7 @@ jobs:
           echo "Found $ZIP_COUNT packages for models: $MODELS, KSU Ver: $KSU_VERS"
           
           # Use pure Bash multi-line string. True newlines are preserved!
-          MSG_TEXT="🚀 <b>OnePlus Kernel Build Successful!</b>
+          MSG_TEXT="🚀 <b>Oppo & OnePlus Kernel Build Successful!</b>
           ━━━━━━━━━━━━━━━━━━
           <b>🏷️ Release Tag:</b> <code>${{ env.NEW_TAG }}</code>
           <b>🔐 Root Solution:</b> ${{ inputs.ksu_type }} (v${KSU_VERS})
@@ -888,7 +888,8 @@ jobs:
           
           for ID in "${CHAT_IDS[@]}"; do
             if [ -z "$ID" ]; then continue; fi
-            echo "Constructing secure JSON payload for Chat ID: $ID..."
+            # echo "Constructing secure JSON payload for Chat ID: $ID..."
+            echo "Đang khởi tạo gói dữ liệu JSON bảo mật cho Chat ID: $ID..."
             
             # jq automatically escapes the true newlines and HTML characters into a safe JSON string
             PAYLOAD=$(jq -n \
@@ -901,7 +902,8 @@ jobs:
                 text: $text
               }')
             
-            echo "Sending POST request to Telegram API (Chat ID: $ID)..."
+            # echo "Sending POST request to Telegram API (Chat ID: $ID)..."
+            echo "Đang gửi yêu cầu POST đến Telegram API (Chat ID: $ID)..."
             
             # Send payload as application/json
             RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
@@ -912,9 +914,9 @@ jobs:
             RESPONSE_BODY=$(echo "$RESPONSE" | head -n -1)
 
             if [ "$HTTP_CODE" -eq 200 ]; then
-              echo "✅ Detailed Telegram notification sent successfully to $ID! response: $RESPONSE_BODY"
+              echo "✅ Đã gửi thông báo chi tiết thành công đến Telegram $ID! response: $RESPONSE_BODY"
             else
-              echo "❌ Failed to send Telegram notification to $ID! status code: $HTTP_CODE, response: $RESPONSE_BODY"
+              echo "❌ Lỗi khi gửi thông báo đến Telegram $ID! status code: $HTTP_CODE, response: $RESPONSE_BODY"
               # We don't necessarily want to exit if one ID fails, but we should log it.
               # However, if it's the only ID, maybe we should? Let's keep it robust.
             fi

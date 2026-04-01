@@ -1,13 +1,19 @@
 name: Build and Release Oppo Kernels
+
+permissions:
+  contents: write
+  actions: write
+
+on:
   workflow_dispatch:
     inputs:
       make_release:
         description: 'Do you want to create a release?'
         required: true
         type: boolean
-        default: true
+        default: false
       op_model:
-        description: 'Select the OnePlus kernels to build'
+        description: 'Select the Oppo kernels to build'
         required: true
         type: choice
         options:
@@ -22,7 +28,7 @@ name: Build and Release Oppo Kernels
           - android14-6.1
           # - android13-5.15
           # - android12-5.10
-        default: OOS16
+        default: OOS14+15+16
       ksu_type:
         description: 'Select KSU Type'
         required: true
@@ -67,12 +73,6 @@ name: Build and Release Oppo Kernels
       #   default: ''
 
 jobs:
-  permissions:
-      contents: write   # Quyền tạo Tag/Release
-      workflows: write  # Quyền quan trọng nhất để sửa file trong .github/workflows
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
   set-op-model:
     runs-on: ubuntu-latest
     outputs:
@@ -113,23 +113,23 @@ jobs:
           jq_filter="."
           
           case "$input" in
-            OOS14+15+16)
-              ;;
+            # OOS14+15+16)
+            #   ;;
             OOS15+16)
               jq_filter="map(select(.os_version == \"OOS15\" or .os_version == \"OOS16\"))"
               ;;
-            OOS14+15)
-              jq_filter="map(select(.os_version == \"OOS14\" or .os_version == \"OOS15\"))"
-              ;;
+            # OOS14+15)
+            #   jq_filter="map(select(.os_version == \"OOS14\" or .os_version == \"OOS15\"))"
+            #   ;;
             OOS16)
               jq_filter="map(select(.os_version == \"OOS16\"))"
               ;;
             OOS15)
               jq_filter="map(select(.os_version == \"OOS15\"))"
               ;;
-            OOS14)
-              jq_filter="map(select(.os_version == \"OOS14\"))"
-              ;;
+            # OOS14)
+            #   jq_filter="map(select(.os_version == \"OOS14\"))"
+            #   ;;
             android*-*.*)
               # Extract android version and kernel version
               IFS='-' read -r av kv <<< "$input"
@@ -204,11 +204,11 @@ jobs:
           
           # Display SUSFS config for each kernel version
           declare -A susfs_inputs=(
-            ["android12-5.10"]="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
-            ["android13-5.15"]="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
+            # ["android12-5.10"]="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
+            # ["android13-5.15"]="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
             ["android14-6.1"]="${{ inputs.android14-6_1_susfs_branch_or_commit }}"
-            ["android15-6.6"]="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
-            ["android16-6.12"]="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
+            # ["android15-6.6"]="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
+            # ["android16-6.12"]="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
           )
           
           for key in "android12-5.10" "android13-5.15" "android14-6.1" "android15-6.6" "android16-6.12"; do
@@ -284,22 +284,22 @@ jobs:
           
           # Map kernel version to input value
           case "$key" in
-            "android12-5.10")
-              susfs_branch="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
-              ;;
-            "android13-5.15")
-              susfs_branch="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
-              ;;
+            # "android12-5.10")
+            #   susfs_branch="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
+            #   ;;
+            # "android13-5.15")
+            #   susfs_branch="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
+            #   ;;
             "android14-6.1")
               susfs_branch="${{ inputs.android14-6_1_susfs_branch_or_commit }}"
               ;;
-            "android15-6.6")
-              susfs_branch="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
-              ;;
-            "android16-6.12")
-              susfs_branch="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
-              ;;
-            *)
+            # "android15-6.6")
+            #   susfs_branch="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
+            #   ;;
+            # "android16-6.12")
+            #   susfs_branch="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
+            #   ;;
+            # *)
               echo "::error::Unsupported kernel version: $key"
               exit 1
               ;;
@@ -580,17 +580,17 @@ jobs:
           CLEAN_BUILD="${{ inputs.clean_build }}"
           
           # Determine SUSFS branches used
-          SUSFS_A12="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
-          SUSFS_A13="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
+          # SUSFS_A12="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
+          # SUSFS_A13="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
           SUSFS_A14="${{ inputs.android14-6_1_susfs_branch_or_commit }}"
-          SUSFS_A15="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
-          SUSFS_A16="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
+          # SUSFS_A15="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
+          # SUSFS_A16="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
           
-          [ -z "$SUSFS_A12" ] && SUSFS_A12="gki-android12-5.10 (auto)"
-          [ -z "$SUSFS_A13" ] && SUSFS_A13="gki-android13-5.15 (auto)"
+          # [ -z "$SUSFS_A12" ] && SUSFS_A12="gki-android12-5.10 (auto)"
+          # [ -z "$SUSFS_A13" ] && SUSFS_A13="gki-android13-5.15 (auto)"
           [ -z "$SUSFS_A14" ] && SUSFS_A14="gki-android14-6.1 (auto)"
-          [ -z "$SUSFS_A15" ] && SUSFS_A15="gki-android15-6.6 (auto)"
-          [ -z "$SUSFS_A16" ] && SUSFS_A16="gki-android16-6.12 (auto)"
+          # [ -z "$SUSFS_A15" ] && SUSFS_A15="gki-android15-6.6 (auto)"
+          # [ -z "$SUSFS_A16" ] && SUSFS_A16="gki-android16-6.12 (auto)"
           
           cat << EOF > release_notes.md
           # 🎯 OnePlus Kernels with $KSU_TYPE & SUSFS $SUSFS_BASE_VERSION
@@ -678,11 +678,11 @@ jobs:
           
           | Kernel Version | SUSFS Branch/Commit |
           |----------------|---------------------|
-          | android12-5.10 | \`$SUSFS_A12\` |
-          | android13-5.15 | \`$SUSFS_A13\` |
+          # | android12-5.10 | \`$SUSFS_A12\` |
+          # | android13-5.15 | \`$SUSFS_A13\` |
           | android14-6.1  | \`$SUSFS_A14\` |
-          | android15-6.6  | \`$SUSFS_A15\` |
-          | android16-6.12 | \`$SUSFS_A16\` |
+          # | android15-6.6  | \`$SUSFS_A15\` |
+          # | android16-6.12 | \`$SUSFS_A16\` |
           
           ---
           

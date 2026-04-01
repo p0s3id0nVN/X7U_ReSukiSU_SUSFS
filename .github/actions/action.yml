@@ -1,4 +1,4 @@
-name: 'Build OnePlus Kernel with KernelSU / ReSukiSU'
+name: 'Build Oppo Find X7 Ultra Kernel with KernelSU / ReSukiSU'
 description: 'GitHub Action to build OnePlus kernels with original KernelSU or ReSukiSU, and SUSFS integration, optimized for performance and reliability'
 inputs:
   op_config_json:

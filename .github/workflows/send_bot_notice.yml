@@ -1,4 +1,5 @@
-name: Test Thông báo Telegram
+name: Test Telegram Notification
+
 on:
   workflow_dispatch:
 
@@ -8,7 +9,7 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: 📱 Test Thông báo Telegram (Latest Release)
+      - name: 📱 Test Telegram Notification (Latest Release)
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
@@ -32,7 +33,7 @@ jobs:
           
           echo "✅ Found latest Release Tag: $LATEST_TAG"
           
-          MSG_TEXT="🧪 <b>[TEST] Oppo Find X7 Ultra Kernel Release!</b>"$'\n'
+          MSG_TEXT="🧪 <b>[TEST] OnePlus Kernel Release!</b>"$'\n'
           MSG_TEXT+="━━━━━━━━━━━━━━━━━━"$'\n'
           MSG_TEXT+="<b>🏷️ Release Tag:</b> <code>${LATEST_TAG}</code>"$'\n'
           MSG_TEXT+="<b>🔐 Root Solution:</b> Auto-detected"$'\n'
@@ -48,7 +49,6 @@ jobs:
             ZIP_COUNT=$(echo "$ASSETS" | grep -c '\.zip$' || true)
             
             MSG_TEXT+="<b>📦 Total Packages:</b> ${ZIP_COUNT} zips"$'\n'
-            # MSG_TEXT+="<b>📱 Supported Models:</b> ${MODELS}"$'\n'
             MSG_TEXT+="<b>📱 Supported Models:</b> ${MODELS}"$'\n'
             MSG_TEXT+="<b>💻 Supported OS:</b> ${OS_VERS}"$'\n\n'
           fi

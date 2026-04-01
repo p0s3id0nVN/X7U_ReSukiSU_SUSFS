@@ -1,8 +1,8 @@
 {
-  "model": "OP12",
-  "soc": "pineapple",
-  "branch": "wild/sm8650",
-  "manifest": "oneplus_12_w.xml",
+  "model": "OP-PAD-GO-2",
+  "soc": "dimensity7300ultra",
+  "branch": "wild/mt6878",
+  "manifest": "oneplus_pad_go_2_mt6878_w.xml",
   "android_version": "android14",
   "kernel_version": "6.1",
   "os_version": "OOS16",

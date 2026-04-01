@@ -22,62 +22,64 @@ on:
         options:
           - ALL
           # Kernel Versions
-          - android15-6.6
+          # - android15-6.6
           - android14-6.1
-          - android14-5.15
-          - android13-5.15
-          - android13-5.10
-          - android12-5.10
+          # - android14-5.15
+          # - android13-5.15
+          # - android13-5.10
+          # - android12-5.10
+          # Oppo Phones
+          - X7U
           # OnePlus Phones
-          - OP15T
-          - OP15r
-          - OP15
-          - OP13
-          - OP13-CPH
-          - OP13-PJZ
-          - OP13r
-          - OP13S
-          - OP13T
+          # - OP15T
+          # - OP15r
+          # - OP15
+          # - OP13
+          # - OP13-CPH
+          # - OP13-PJZ
+          # - OP13r
+          # - OP13S
+          # - OP13T
           - OP12
-          - OP12r
-          - OP11
-          - OP11r
-          - OP10pro
-          - OP10t
-          - OP10r
+          # - OP12r
+          # - OP11
+          # - OP11r
+          # - OP10pro
+          # - OP10t
+          # - OP10r
           # OnePlus Nord Series
-          - OP-Nord-5
-          - OP-NORD-4
-          - OP-NORD-3
-          - OP-NORD-4-CE
-          - OP-NORD-CE-5
-          - OP-NORD-CE4-LITE
+          # - OP-Nord-5
+          # - OP-NORD-4
+          # - OP-NORD-3
+          # - OP-NORD-4-CE
+          # - OP-NORD-CE-5
+          # - OP-NORD-CE4-LITE
           # OnePlus Ace Series
-          - OP-ACE-6T
-          - OP-ACE-6
-          - OP-ACE-5-PRO
-          - OP-ACE-5
-          - OP-ACE-5-ULTRA
-          - OP-ACE-5-RACE
-          - OP-ACE-3-PRO
-          - OP-ACE-3V
-          - OP-ACE-3
-          - OP-ACE-2-PRO
-          - OP-ACE-2
-          - OP-ACE-2V
-          - OP-ACE-RACE
-          - OP-ACE
+          # - OP-ACE-6T
+          # - OP-ACE-6
+          # - OP-ACE-5-PRO
+          # - OP-ACE-5
+          # - OP-ACE-5-ULTRA
+          # - OP-ACE-5-RACE
+          # - OP-ACE-3-PRO
+          # - OP-ACE-3V
+          # - OP-ACE-3
+          # - OP-ACE-2-PRO
+          # - OP-ACE-2
+          # - OP-ACE-2V
+          # - OP-ACE-RACE
+          # - OP-ACE
           # OnePlus Tablets & Others
-          - OP-OPEN
-          - OP-PAD-3-SM8750
-          - OP-PAD-3-MT6897
-          - OP-PAD-2-PRO
-          - OP-PAD-2-SM8650
-          - OP-PAD-2-MT6991
-          - OP-PAD-PRO
-          - OP-PAD-MT6983
-          - OP-PAD-LITE
-          - OP-PAD-GO-2
+          # - OP-OPEN
+          # - OP-PAD-3-SM8750
+          # - OP-PAD-3-MT6897
+          # - OP-PAD-2-PRO
+          # - OP-PAD-2-SM8650
+          # - OP-PAD-2-MT6991
+          # - OP-PAD-PRO
+          # - OP-PAD-MT6983
+          # - OP-PAD-LITE
+          # - OP-PAD-GO-2
       
       cache_pattern:
         type: choice

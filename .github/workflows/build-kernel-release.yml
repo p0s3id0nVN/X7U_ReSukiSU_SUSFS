@@ -1,4 +1,4 @@
-name: Build and Release Oppo & OnePlus Kernels
+name: Build and Release OnePlus Kernels
 
 permissions:
   contents: write
@@ -11,24 +11,24 @@ on:
         description: 'Do you want to create a release?'
         required: true
         type: boolean
-        default: true
+        default: false
       op_model:
-        description: 'Select the Oppo & OnePlus kernels to build'
+        description: 'Select the OnePlus kernels to build'
         required: true
         type: choice
         options:
-          # - OOS14+15+16
-          # - OOS15+16
-          # - OOS14+15
+          - OOS14+15+16
+          - OOS15+16
+          - OOS14+15
           - OOS16
-          # - OOS15
-          # - OOS14
-          # - android16-6.12
-          # - android15-6.6
+          - OOS15
+          - OOS14
+          - android16-6.12
+          - android15-6.6
           - android14-6.1
-          # - android13-5.15
-          # - android12-5.10
-        default: OOS16
+          - android13-5.15
+          - android12-5.10
+        default: OOS14+15+16
       ksu_type:
         description: 'Select KSU Type'
         required: true
@@ -51,26 +51,26 @@ on:
         description: 'Clean build (no ccache)'
         type: boolean
         default: false
-      # android12-5_10_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android12-5.10'
-      #   type: string
-      #   default: ''      
-      # android13-5_15_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android13-5.15'
-      #   type: string
-      #   default: ''      
+      android12-5_10_susfs_branch_or_commit:
+        description: 'Enter SusFS Branch or commit hash for android12-5.10'
+        type: string
+        default: ''      
+      android13-5_15_susfs_branch_or_commit:
+        description: 'Enter SusFS Branch or commit hash for android13-5.15'
+        type: string
+        default: ''      
       android14-6_1_susfs_branch_or_commit:
         description: 'Enter SusFS Branch or commit hash for android14-6.1'
         type: string
         default: ''
-      # android15-6_6_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android15-6.6'
-      #   type: string
-      #   default: ''
-      # android16-6_12_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android16-6.12'
-      #   type: string
-      #   default: ''
+      android15-6_6_susfs_branch_or_commit:
+        description: 'Enter SusFS Branch or commit hash for android15-6.6'
+        type: string
+        default: ''
+      android16-6_12_susfs_branch_or_commit:
+        description: 'Enter SusFS Branch or commit hash for android16-6.12'
+        type: string
+        default: ''
 
 jobs:
   set-op-model:
@@ -204,11 +204,11 @@ jobs:
           
           # Display SUSFS config for each kernel version
           declare -A susfs_inputs=(
-            # ["android12-5.10"]="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
-            # ["android13-5.15"]="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
+            ["android12-5.10"]="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
+            ["android13-5.15"]="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
             ["android14-6.1"]="${{ inputs.android14-6_1_susfs_branch_or_commit }}"
-            # ["android15-6.6"]="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
-            # ["android16-6.12"]="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
+            ["android15-6.6"]="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
+            ["android16-6.12"]="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
           )
           
           for key in "android12-5.10" "android13-5.15" "android14-6.1" "android15-6.6" "android16-6.12"; do
@@ -284,21 +284,21 @@ jobs:
           
           # Map kernel version to input value
           case "$key" in
-            # "android12-5.10")
-            #   susfs_branch="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
-            #   ;;
-            # "android13-5.15")
-            #   susfs_branch="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
-            #   ;;
+            "android12-5.10")
+              susfs_branch="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
+              ;;
+            "android13-5.15")
+              susfs_branch="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
+              ;;
             "android14-6.1")
               susfs_branch="${{ inputs.android14-6_1_susfs_branch_or_commit }}"
               ;;
-            # "android15-6.6")
-            #   susfs_branch="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
-            #   ;;
-            # "android16-6.12")
-            #   susfs_branch="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
-            #   ;;
+            "android15-6.6")
+              susfs_branch="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
+              ;;
+            "android16-6.12")
+              susfs_branch="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
+              ;;
             *)
               echo "::error::Unsupported kernel version: $key"
               exit 1
@@ -512,7 +512,7 @@ jobs:
       REPO_OWNER: ${{ github.repository_owner }}
       REPO_NAME: ${{ github.event.repository.name }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      RELEASE_NAME: 'OP Kernels With ReSukiSU & SUSFS v2.1.0'
+      RELEASE_NAME: 'OnePlus Kernels With ReSukiSU & SUSFS v2.1.0'
       SUSFS_BASE_VERSION: 'v2.1.0'
     steps:
       - name: 📥 Checkout code
@@ -580,17 +580,17 @@ jobs:
           CLEAN_BUILD="${{ inputs.clean_build }}"
           
           # Determine SUSFS branches used
-          # SUSFS_A12="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
-          # SUSFS_A13="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
+          SUSFS_A12="${{ inputs.android12-5_10_susfs_branch_or_commit }}"
+          SUSFS_A13="${{ inputs.android13-5_15_susfs_branch_or_commit }}"
           SUSFS_A14="${{ inputs.android14-6_1_susfs_branch_or_commit }}"
-          # SUSFS_A15="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
-          # SUSFS_A16="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
+          SUSFS_A15="${{ inputs.android15-6_6_susfs_branch_or_commit }}"
+          SUSFS_A16="${{ inputs.android16-6_12_susfs_branch_or_commit }}"
           
-          # [ -z "$SUSFS_A12" ] && SUSFS_A12="gki-android12-5.10 (auto)"
-          # [ -z "$SUSFS_A13" ] && SUSFS_A13="gki-android13-5.15 (auto)"
+          [ -z "$SUSFS_A12" ] && SUSFS_A12="gki-android12-5.10 (auto)"
+          [ -z "$SUSFS_A13" ] && SUSFS_A13="gki-android13-5.15 (auto)"
           [ -z "$SUSFS_A14" ] && SUSFS_A14="gki-android14-6.1 (auto)"
-          # [ -z "$SUSFS_A15" ] && SUSFS_A15="gki-android15-6.6 (auto)"
-          # [ -z "$SUSFS_A16" ] && SUSFS_A16="gki-android16-6.12 (auto)"
+          [ -z "$SUSFS_A15" ] && SUSFS_A15="gki-android15-6.6 (auto)"
+          [ -z "$SUSFS_A16" ] && SUSFS_A16="gki-android16-6.12 (auto)"
           
           cat << EOF > release_notes.md
           # 🎯 OnePlus Kernels with $KSU_TYPE & SUSFS $SUSFS_BASE_VERSION
@@ -678,11 +678,11 @@ jobs:
           
           | Kernel Version | SUSFS Branch/Commit |
           |----------------|---------------------|
-          # | android12-5.10 | \`$SUSFS_A12\` |
-          # | android13-5.15 | \`$SUSFS_A13\` |
+          | android12-5.10 | \`$SUSFS_A12\` |
+          | android13-5.15 | \`$SUSFS_A13\` |
           | android14-6.1  | \`$SUSFS_A14\` |
-          # | android15-6.6  | \`$SUSFS_A15\` |
-          # | android16-6.12 | \`$SUSFS_A16\` |
+          | android15-6.6  | \`$SUSFS_A15\` |
+          | android16-6.12 | \`$SUSFS_A16\` |
           
           ---
           
@@ -855,12 +855,11 @@ jobs:
           ZIP_COUNT=${#ZIPS[@]}
           
           if [ "$ZIP_COUNT" -eq 0 ]; then
-            MODELS="X7U"
+            MODELS="None"
             OS_VERS="None"
             KSU_VERS="Unknown"
           else
             # Extract models (2nd part), OS versions (3rd part), and KSU versions (6th part) from AK3_OP12_OOS15_android15-6.6_ReSukiSU_30700...zip
-            # MODELS=$(printf "%s\n" "${ZIPS[@]}" | awk -F'/' '{print $NF}' | awk -F'_' '{print $2}' | sort -u | paste -sd ", " -)
             MODELS=$(printf "%s\n" "${ZIPS[@]}" | awk -F'/' '{print $NF}' | awk -F'_' '{print $2}' | sort -u | paste -sd ", " -)
             OS_VERS=$(printf "%s\n" "${ZIPS[@]}" | awk -F'/' '{print $NF}' | awk -F'_' '{print $3}' | sort -u | paste -sd ", " -)
             KSU_VERS=$(printf "%s\n" "${ZIPS[@]}" | awk -F'/' '{print $NF}' | awk -F'_' '{print $6}' | sort -u | paste -sd ", " -)
@@ -869,7 +868,7 @@ jobs:
           echo "Found $ZIP_COUNT packages for models: $MODELS, KSU Ver: $KSU_VERS"
           
           # Use pure Bash multi-line string. True newlines are preserved!
-          MSG_TEXT="🚀 <b>Oppo & OnePlus Kernel Build Successful!</b>
+          MSG_TEXT="🚀 <b>OnePlus Kernel Build Successful!</b>
           ━━━━━━━━━━━━━━━━━━
           <b>🏷️ Release Tag:</b> <code>${{ env.NEW_TAG }}</code>
           <b>🔐 Root Solution:</b> ${{ inputs.ksu_type }} (v${KSU_VERS})
@@ -888,8 +887,7 @@ jobs:
           
           for ID in "${CHAT_IDS[@]}"; do
             if [ -z "$ID" ]; then continue; fi
-            # echo "Constructing secure JSON payload for Chat ID: $ID..."
-            echo "Đang khởi tạo gói dữ liệu JSON bảo mật cho Chat ID: $ID..."
+            echo "Constructing secure JSON payload for Chat ID: $ID..."
             
             # jq automatically escapes the true newlines and HTML characters into a safe JSON string
             PAYLOAD=$(jq -n \
@@ -902,8 +900,7 @@ jobs:
                 text: $text
               }')
             
-            # echo "Sending POST request to Telegram API (Chat ID: $ID)..."
-            echo "Đang gửi yêu cầu POST đến Telegram API (Chat ID: $ID)..."
+            echo "Sending POST request to Telegram API (Chat ID: $ID)..."
             
             # Send payload as application/json
             RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
@@ -914,9 +911,9 @@ jobs:
             RESPONSE_BODY=$(echo "$RESPONSE" | head -n -1)
 
             if [ "$HTTP_CODE" -eq 200 ]; then
-              echo "✅ Đã gửi thông báo chi tiết thành công đến Telegram $ID! response: $RESPONSE_BODY"
+              echo "✅ Detailed Telegram notification sent successfully to $ID! response: $RESPONSE_BODY"
             else
-              echo "❌ Lỗi khi gửi thông báo đến Telegram $ID! status code: $HTTP_CODE, response: $RESPONSE_BODY"
+              echo "❌ Failed to send Telegram notification to $ID! status code: $HTTP_CODE, response: $RESPONSE_BODY"
               # We don't necessarily want to exit if one ID fails, but we should log it.
               # However, if it's the only ID, maybe we should? Let's keep it robust.
             fi

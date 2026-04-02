@@ -104,7 +104,7 @@ jobs:
             
             QUERY='query($name: String!, $owner: String!) {
               repository(name: $name, owner: $owner) {
-                refs(refPrefix: "refs/heads/", first: 100) {
+                refs(refPrefix: "refs/heads/", first: 100, orderBy: {field: TAG_COMMIT_DATE, direction: DESC}) {
                   nodes {
                     name
                     target {
@@ -141,7 +141,14 @@ jobs:
             
             [ "$repo" == "kernel_manifest" ] && ACTIVE_QUERY="$KERNEL_MANIFEST_QUERY" || ACTIVE_QUERY="$QUERY"
             
-            BRANCH_DATA=$(gh api graphql -f query="$ACTIVE_QUERY" -f owner="$ORG" -f name="$repo" --jq '.data.repository.refs.nodes[]' 2>/dev/null || echo "")
+            RETRY_COUNT=0; MAX_RETRIES=3; BRANCH_DATA=""
+            until [ $RETRY_COUNT -ge $MAX_RETRIES ]; do
+              BRANCH_DATA=$(gh api graphql -f query="$ACTIVE_QUERY" -f owner="$ORG" -f name="$repo" --jq '.data.repository.refs.nodes[]' 2>/dev/null)
+              [ $? -eq 0 ] && [ -n "$BRANCH_DATA" ] && break
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              echo "⚠️ API failed for $repo. Retry $RETRY_COUNT/$MAX_RETRIES..."
+              sleep 5
+            done
             
             if [ ! -z "$BRANCH_DATA" ]; then
               echo "<details><summary><b>$repo</b></summary>" >> ../local_summary.md
@@ -187,15 +194,29 @@ jobs:
               done <<< "$BRANCH_DATA"
               
               echo "</details>" >> ../local_summary.md
+            else
+              # 🛑 API returned no branches. Let's verify why.
+              echo "❓ No branch data for $repo. Verifying if repo exists..."
+              
+              if gh repo view "$ORG/$repo" > /dev/null 2>&1; then
+                # ✅ Repo EXISTS, but API failed to give branches (Timeout/Jitter)
+                echo "⚠️ API Jitter detected for $repo. Preserving state."
+                OLD_REPO_STATE=$(jq -c ".\"$repo\" // {}" "$STATE_FILE")
+                jq --argjson old "$OLD_REPO_STATE" ".\"$repo\" = \$old" new_state.json > tmp.json && mv tmp.json new_state.json
+              else
+                # 🗑️ Repo is actually GONE (404)
+                echo "🗑️ Confirmation: $repo has been deleted from GitHub."
+                CHANGES_DETECTED="true"
+                DELETED_ITEMS+="- 🗑️ **Repo Deleted**: $repo\n"
+              fi
             fi
           done
           
           while read -r old_repo; do
             [ -z "$old_repo" ] && continue
-            if ! jq -e ".\"$old_repo\"" new_state.json > /dev/null; then
-              DELETED_ITEMS+="- 🗑️ **Repo Deleted**: $old_repo\n"
-              CHANGES_DETECTED="true"
-            else
+            
+            # If the repo still exists in the new state, check its branches
+            if jq -e ".\"$old_repo\"" new_state.json > /dev/null; then
               while read -r old_branch; do
                 [ -z "$old_branch" ] && continue
                 if ! jq -e ".\"$old_repo\".\"$old_branch\"" new_state.json > /dev/null; then

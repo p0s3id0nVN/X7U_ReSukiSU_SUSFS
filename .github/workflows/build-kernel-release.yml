@@ -485,7 +485,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      workflows: write
       actions: write
     if: ${{ inputs.make_release }}
     env:

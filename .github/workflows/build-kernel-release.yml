@@ -1,5 +1,6 @@
 name: Build and Release OnePlus Kernels
 
+# Định nghĩa quyền hạn ở cấp độ gốc (Root level)
 permissions:
   contents: write
   workflows: write
@@ -18,17 +19,8 @@ on:
         required: true
         type: choice
         options:
-          # - OOS14+15+16
-          # - OOS15+16
-          # - OOS14+15
           - OOS16
-          # - OOS15
-          # - OOS14
-          # - android16-6.12
-          # - android15-6.6
           - android14-6.1
-          # - android13-5.15
-          # - android12-5.10
         default: OOS16
       ksu_type:
         description: 'Select KSU Type'
@@ -39,7 +31,7 @@ on:
           - KSU
         default: ReSukiSU
       ksu_branch_or_hash:
-        description: 'KSU branch or commit hash (leave empty for default latest)'
+        description: 'KSU branch or commit hash'
         type: string
         default: ''
       optimize_level:
@@ -52,27 +44,10 @@ on:
         description: 'Clean build (no ccache)'
         type: boolean
         default: false
-      # android12-5_10_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android12-5.10'
-      #   type: string
-      #   default: ''      
-      # android13-5_15_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android13-5.15'
-      #   type: string
-      #   default: ''      
       android14-6_1_susfs_branch_or_commit:
-        description: 'Enter SusFS Branch or commit hash for android14-6.1'
+        description: 'Enter SUSFS Branch or commit hash for android14-6.1'
         type: string
         default: ''
-      # android15-6_6_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android15-6.6'
-      #   type: string
-      #   default: ''
-      # android16-6_12_susfs_branch_or_commit:
-      #   description: 'Enter SusFS Branch or commit hash for android16-6.12'
-      #   type: string
-      #   default: ''
-
 jobs:
   set-op-model:
     runs-on: ubuntu-latest

@@ -50,6 +50,7 @@ on:
 jobs:
   set-op-model:
     runs-on: ubuntu-latest
+    
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
       device_count: ${{ steps.set-matrix.outputs.count }}
@@ -482,6 +483,10 @@ jobs:
   trigger-release:
     needs: [build]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      workflows: write
+      actions: write
     if: ${{ inputs.make_release }}
     env:
       

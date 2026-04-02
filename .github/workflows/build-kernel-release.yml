@@ -2,6 +2,7 @@ name: Build and Release OnePlus Kernels
 
 permissions:
   contents: write
+  workflows: write
   actions: write
 
 on:

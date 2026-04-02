@@ -510,6 +510,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ inputs.make_release }}
     env:
+      commit: write
+      actions: write
       workflows: write
       REPO_OWNER: ${{ github.repository_owner }}
       REPO_NAME: ${{ github.event.repository.name }}

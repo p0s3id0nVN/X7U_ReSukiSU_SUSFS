@@ -11,7 +11,7 @@ on:
         description: 'Do you want to create a release?'
         required: true
         type: boolean
-        default: false
+        default: true
       op_model:
         description: 'Select the OP kernels to build'
         required: true

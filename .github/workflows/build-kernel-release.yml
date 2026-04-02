@@ -3,7 +3,6 @@ name: Build and Release OnePlus Kernels
 # Định nghĩa quyền hạn ở cấp độ gốc (Root level)
 permissions:
   contents: write
-  workflows: write
   actions: write
 
 on:

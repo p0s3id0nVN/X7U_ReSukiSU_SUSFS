@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔥 Huangdihd's Fork of Wild Kernels for OnePlus (Oppo/Realme)
+# 🔥 PSD's Fork of Wild Kernels for OnePlus (Oppo/Realme)
 
 [![KernelSU](https://img.shields.io/badge/KernelSU-Supported-green)](https://kernelsu.org/)
 [![ReSukiSU](https://img.shields.io/badge/ReSukiSU-Supported-green)](https://resukisu.github.io/)

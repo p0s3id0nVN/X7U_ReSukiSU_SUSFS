@@ -1,5 +1,5 @@
 # 📱 OnePlusOSS Kernel Tracker
-> **Last Update:** Mon Jun  8 14:03:27 UTC 2026 (UTC)
+> **Last Update:** Mon Jun  8 18:23:06 UTC 2026 (UTC)
 Daily automated report for OnePlus Kernel branches.
 ### 📱 Kernel Status Report
 <details><summary><b>android_kernel_5.10_oneplus_mt6895</b></summary>
@@ -9,7 +9,7 @@ Daily automated report for OnePlus Kernel branches.
 * **Commit SHA:** `f3e95e7`
 * **Message:** Synchronize code for OnePlus CPH2411_15.0.0.700(EX01) CPH2423_15.0.0.700(EX01)
 ---
-#### Branch: `oneplus/mt6895_v_15.0.0_ace` 🔄 Updated
+#### Branch: `oneplus/mt6895_v_15.0.0_ace` ✅
 * **Kernel Version:** `5.10.236`
 * **Commit SHA:** `8baa5a3`
 * **Message:** Synchronize code for OnePlus PGKM10_15.0.0.1800(CN01)
@@ -127,7 +127,7 @@ Daily automated report for OnePlus Kernel branches.
 * **Commit SHA:** `60e801f`
 * **Message:** add oneplus_15r.xml
 ---
-#### Branch: `oneplus/sm8850` 🔄 Updated
+#### Branch: `oneplus/sm8850` ✅
 * **Kernel Version:** `N/A`
 * **Commit SHA:** `ecdd480`
 * **Message:**  add oneplus_pad_3_pro.xml && oneplus_pad_4.xml

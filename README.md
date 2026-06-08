@@ -1,5 +1,5 @@
 # 📱 OnePlusOSS Kernel Tracker
-> **Last Update:** Mon Jun  8 03:36:28 UTC 2026 (UTC)
+> **Last Update:** Mon Jun  8 08:50:59 UTC 2026 (UTC)
 Daily automated report for OnePlus Kernel branches.
 ### 📱 Kernel Status Report
 <details><summary><b>android_kernel_common_oneplus_sm8750</b></summary>
@@ -54,15 +54,15 @@ Daily automated report for OnePlus Kernel branches.
 * **Commit SHA:** `5a55344`
 * **Message:** Synchronize code for OnePlus CPH2649_16.0.7.201(EX01) CPH2653_16.0.7.201(EX01) CPH2655_16.0.7.201(EX01) PJZ110_16.0.7.201(CN01)
 ---
-#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13t` ✅
+#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13t` 🔄 Updated
 * **Kernel Version:** `6.6.89`
-* **Commit SHA:** `16fe7f1`
-* **Message:** Synchronize code for OnePlus PKX110_16.0.5.701(CN01)
+* **Commit SHA:** `bce1edf`
+* **Message:** Synchronize code for OnePlus PKX110_16.0.7.200(CN01)
 ---
-#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13s` ✅
+#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13s` 🔄 Updated
 * **Kernel Version:** `6.6.89`
-* **Commit SHA:** `5499872`
-* **Message:** Synchronize code for OnePlus CPH2723_16.0.0.211(EX01)
+* **Commit SHA:** `11d7ebe`
+* **Message:** Synchronize code for OnePlus CPH2723_16.0.7.200(EX01)
 ---
 #### Branch: `oneplus/sm8750_b_16.0.0_oneplus_ace5_pro` ✅
 * **Kernel Version:** `6.6.89`
@@ -127,15 +127,15 @@ Daily automated report for OnePlus Kernel branches.
 * **Commit SHA:** `730abe2`
 * **Message:** Synchronize code for OnePlus CPH2649_16.0.7.201(EX01) CPH2653_16.0.7.201(EX01) CPH2655_16.0.7.201(EX01) PJZ110_16.0.7.201(CN01)
 ---
-#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13t` ✅
+#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13t` 🔄 Updated
 * **Kernel Version:** `6.6.89`
-* **Commit SHA:** `9cb6546`
-* **Message:** Synchronize code for OnePlus PKX110_16.0.5.701(CN01)
+* **Commit SHA:** `dd2ad9f`
+* **Message:** Synchronize code for OnePlus PKX110_16.0.7.200(CN01)
 ---
-#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13s` ✅
+#### Branch: `oneplus/sm8750_b_16.0.0_oneplus_13s` 🔄 Updated
 * **Kernel Version:** `6.6.89`
-* **Commit SHA:** `51f8ca5`
-* **Message:** Synchronize code for OnePlus CPH2723_16.0.0.211(EX01)
+* **Commit SHA:** `820cd1b`
+* **Message:** Synchronize code for OnePlus CPH2723_16.0.7.200(EX01)
 ---
 #### Branch: `oneplus/sm8750_b_16.0.0_oneplus_ace5_pro` ✅
 * **Kernel Version:** `6.6.89`

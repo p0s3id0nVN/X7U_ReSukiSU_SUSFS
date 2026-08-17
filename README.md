@@ -1,7 +1,33 @@
 # 📱 OnePlusOSS Kernel Tracker
-> **Last Update:** Mon Aug 17 08:37:24 UTC 2026 (UTC)
+> **Last Update:** Mon Aug 17 10:27:22 UTC 2026 (UTC)
 Daily automated report for OnePlus Kernel branches.
 ### 📱 Kernel Status Report
+<details><summary><b>android_kernel_common_oneplus_sm7635</b></summary>
+
+#### Branch: `oneplus/sm7635_b_16.0.0_turbo_6v` ✅
+* **Kernel Version:** `6.1.141`
+* **Commit SHA:** `e2601ea`
+* **Message:** Synchronize code for OnePlus PLY110_16.0.7.200(CN01)
+---
+#### Branch: `oneplus/sm7635_b_16.0.0_nord_ce6` 🆕
+* **Kernel Version:** `3.11.0`
+* **Commit SHA:** `20138d6`
+* **Message:** Drivers: hv: balloon: Initialize the transaction ID just before sending the packet
+---
+</details>
+<details><summary><b>android_kernel_oneplus_sm7635</b></summary>
+
+#### Branch: `oneplus/sm7635_b_16.0.0_turbo_6v` ✅
+* **Kernel Version:** `6.1.141`
+* **Commit SHA:** `6b75f3f`
+* **Message:** Synchronize code for OnePlus PLY110_16.0.7.200(CN01)
+---
+#### Branch: `oneplus/sm7635_b_16.0.0_nord_ce6` 🆕
+* **Kernel Version:** `6.1.141`
+* **Commit SHA:** `841633c`
+* **Message:** Synchronize code for OnePlus CPH2805_16.0.5.1101(EX01) CPH2807_16.0.5.1101(EX01)
+---
+</details>
 <details><summary><b>android_kernel_oneplus_mt6835</b></summary>
 
 #### Branch: `oneplus/mt6835_b_16.0_n6` ✅
@@ -665,22 +691,6 @@ Daily automated report for OnePlus Kernel branches.
 * **Kernel Version:** `6.1.141`
 * **Commit SHA:** `5e04537`
 * **Message:** Synchronize code for OnePlus PJX110_16.0.5.701(CN01)
----
-</details>
-<details><summary><b>android_kernel_common_oneplus_sm7635</b></summary>
-
-#### Branch: `oneplus/sm7635_b_16.0.0_turbo_6v` ✅
-* **Kernel Version:** `6.1.141`
-* **Commit SHA:** `e2601ea`
-* **Message:** Synchronize code for OnePlus PLY110_16.0.7.200(CN01)
----
-</details>
-<details><summary><b>android_kernel_oneplus_sm7635</b></summary>
-
-#### Branch: `oneplus/sm7635_b_16.0.0_turbo_6v` ✅
-* **Kernel Version:** `6.1.141`
-* **Commit SHA:** `6b75f3f`
-* **Message:** Synchronize code for OnePlus PLY110_16.0.7.200(CN01)
 ---
 </details>
 <details><summary><b>android_kernel_common_oneplus_sm6375</b></summary>
